@@ -10,8 +10,8 @@ using TechademyEmployeeManagement.DataAccess;
 namespace TechademyEmployeeManagement.Migrations
 {
     [DbContext(typeof(EmployeeContext))]
-    [Migration("20221105061357_Ii")]
-    partial class Ii
+    [Migration("20221105062532_n")]
+    partial class n
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

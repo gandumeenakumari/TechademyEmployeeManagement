@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace TechademyEmployeeManagement.Migrations
 {
-    public partial class Initial : Migration
+    public partial class n : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -11,14 +11,13 @@ namespace TechademyEmployeeManagement.Migrations
                 name: "Designation",
                 columns: table => new
                 {
-                    ID = table.Column<int>(nullable: false)
+                    DesignationID = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    DesignationID = table.Column<int>(nullable: false),
                     DesignationName = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Designation", x => x.ID);
+                    table.PrimaryKey("PK_Designation", x => x.DesignationID);
                 });
 
             migrationBuilder.CreateTable(
@@ -62,7 +61,7 @@ namespace TechademyEmployeeManagement.Migrations
                         name: "FK_EmployeeDetails_Designation_DesignationID",
                         column: x => x.DesignationID,
                         principalTable: "Designation",
-                        principalColumn: "ID",
+                        principalColumn: "DesignationID",
                         onDelete: ReferentialAction.Cascade);
                 });
 
