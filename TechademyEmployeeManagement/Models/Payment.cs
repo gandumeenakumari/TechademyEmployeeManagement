@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace TechademyEmployeeManagement.DataAccess.Models
+namespace TechademyEmployeeManagement.Models
 {
     public class Payment
     {

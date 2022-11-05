@@ -5,8 +5,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using TechademyEmployeeManagement.DataAccess;
-using TechademyEmployeeManagement.DataAccess.Models;
+using TechademyEmployeeManagement.Core.IRepository;
+using TechademyEmployeeManagement.Core.Repository;
+using TechademyEmployeeManagement.Data;
+using TechademyEmployeeManagement.Models;
 
 namespace TechademyEmployeeManagement.Controllers
 {
@@ -14,50 +16,33 @@ namespace TechademyEmployeeManagement.Controllers
     [ApiController]
     public class EmployeeDetailsController : ControllerBase
     {
-        private readonly EmployeeContext _context;
-        public EmployeeDetailsController(EmployeeContext context)
+
+        private readonly IEmployeeRepository employeeRepository;
+        public EmployeeDetailsController(IEmployeeRepository _employeeRepository)
         {
-            _context = context;
+            employeeRepository = _employeeRepository;
         }
 
         [HttpGet]
 
-        public async Task<ActionResult<IEnumerable<EmployeeDTO>>> GetAllEmployees()
+        public ActionResult<IEnumerable<EmployeeDTO>> GetAllEmployees()
         {
-            var employee = await _context.EmployeeDetails
-                .Join(
-                _context.Designation,
-                emp => emp.DesignationID,
-                des => des.DesignationID,
-                (emp, des) => new EmployeeDTO
-                {
-                    ID=emp.ID,
-                    EmployeeID = emp.EmployeeID,
-                    EmployeeName = emp.EmployeeName,
-                    Gender = emp.Gender,
-                    MobileNumber = emp.MobileNumber,
-                    Address = emp.Address,
-                    Email = emp.Email,
-                    DesignationID = des.DesignationID,
-                    DesignationName = des.DesignationName,
-                    RoleName=des.RoleName,
-                    DepartmentName=des.DepartmentName,
-                    MemberSince = emp.MemberSince
-
-                }
-                ).ToListAsync();
-            return employee;
+            try
+            {
+                var employee = employeeRepository.GetAllEmployees();
+                return Ok(employee);
+            }
+            catch (Exception ex)
+            {
+                return Ok(ex.Message);
+            }
         }
 
         [HttpPost]
 
-        public async Task<ActionResult> AddNewEmployee(EmployeeDetails employee)
+        public ActionResult AddNewEmployee(EmployeeDetails employee)
         {
-            _context.EmployeeDetails.Add(employee);
-            // await _context.EmployeeDetails.AddAsync(employee);
-            await _context.SaveChangesAsync();
-            return CreatedAtAction("GetAllEmployees", new { id = employee.ID }, employee);
-
+            return Ok(employee);
         }
 
 
@@ -72,24 +57,24 @@ namespace TechademyEmployeeManagement.Controllers
 
 
 
-            //[HttpGet]
-            //public async Task<ActionResult<IEnumerable<EmployeeDetails>>> GetAllEmployeeDetails()
-            //{
-            //    return await _context.EmployeeDetails
-            //        .AsNoTracking()
-            //        .Include(i=>i.Designation)
-            //        .ToListAsync();
+        //[HttpGet]
+        //public async Task<ActionResult<IEnumerable<EmployeeDetails>>> GetAllEmployeeDetails()
+        //{
+        //    return await _context.EmployeeDetails
+        //        .AsNoTracking()
+        //        .Include(i=>i.Designation)
+        //        .ToListAsync();
 
-            //}
-            //[HttpPost]
-            //public async Task<ActionResult> AddNewEmployee(EmployeeDetails employee)
-            //{
-            //    _context.EmployeeDetails.Add(employee);
-            //    // await _context.EmployeeDetails.AddAsync(employee);
-            //    await _context.SaveChangesAsync();
-            //    return CreatedAtAction("GetAllEmployeeDetails",
-            //    new { id = employee.ID }, employee);
-        }
+        //}
+        //[HttpPost]
+        //public async Task<ActionResult> AddNewEmployee(EmployeeDetails employee)
+        //{
+        //    _context.EmployeeDetails.Add(employee);
+        //    // await _context.EmployeeDetails.AddAsync(employee);
+        //    await _context.SaveChangesAsync();
+        //    return CreatedAtAction("GetAllEmployeeDetails",
+        //    new { id = employee.ID }, employee);
+    }
 
     }
 

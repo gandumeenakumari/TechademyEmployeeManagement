@@ -5,12 +5,12 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using TechademyEmployeeManagement.DataAccess;
+using TechademyEmployeeManagement.Data;
 
 namespace TechademyEmployeeManagement.Migrations
 {
     [DbContext(typeof(EmployeeContext))]
-    [Migration("20221105065728_new")]
+    [Migration("20221105131637_new")]
     partial class @new
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -21,7 +21,7 @@ namespace TechademyEmployeeManagement.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("TechademyEmployeeManagement.DataAccess.Models.Designation", b =>
+            modelBuilder.Entity("TechademyEmployeeManagement.Models.Designation", b =>
                 {
                     b.Property<int>("DesignationID")
                         .ValueGeneratedOnAdd()
@@ -42,7 +42,7 @@ namespace TechademyEmployeeManagement.Migrations
                     b.ToTable("Designation");
                 });
 
-            modelBuilder.Entity("TechademyEmployeeManagement.DataAccess.Models.EmployeeDTO", b =>
+            modelBuilder.Entity("TechademyEmployeeManagement.Models.EmployeeDTO", b =>
                 {
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
@@ -87,7 +87,7 @@ namespace TechademyEmployeeManagement.Migrations
                     b.ToTable("employeeDTOs");
                 });
 
-            modelBuilder.Entity("TechademyEmployeeManagement.DataAccess.Models.EmployeeDetails", b =>
+            modelBuilder.Entity("TechademyEmployeeManagement.Models.EmployeeDetails", b =>
                 {
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
@@ -125,9 +125,54 @@ namespace TechademyEmployeeManagement.Migrations
                     b.ToTable("EmployeeDetails");
                 });
 
-            modelBuilder.Entity("TechademyEmployeeManagement.DataAccess.Models.EmployeeDetails", b =>
+            modelBuilder.Entity("TechademyEmployeeManagement.Models.RequestLeave", b =>
                 {
-                    b.HasOne("TechademyEmployeeManagement.DataAccess.Models.Designation", "Designation")
+                    b.Property<int>("LeaveID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("LeaveReason")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LeaveStatus")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LeaveType")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("When")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("LeaveID");
+
+                    b.ToTable("requestLeaves");
+                });
+
+            modelBuilder.Entity("TechademyEmployeeManagement.Models.WorkingHours", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<TimeSpan>("CompanyWokingHours")
+                        .HasColumnType("time");
+
+                    b.Property<TimeSpan>("EmployeeWorkingHours")
+                        .HasColumnType("time");
+
+                    b.Property<TimeSpan>("TotalWorkingHours")
+                        .HasColumnType("time");
+
+                    b.HasKey("ID");
+
+                    b.ToTable("WorkingHours");
+                });
+
+            modelBuilder.Entity("TechademyEmployeeManagement.Models.EmployeeDetails", b =>
+                {
+                    b.HasOne("TechademyEmployeeManagement.Models.Designation", "Designation")
                         .WithMany("EmployeeDetails")
                         .HasForeignKey("DesignationID")
                         .OnDelete(DeleteBehavior.Cascade)

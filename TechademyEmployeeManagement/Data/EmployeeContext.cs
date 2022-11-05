@@ -1,11 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using TechademyEmployeeManagement.DataAccess.Models;
+using TechademyEmployeeManagement.Models;
 
-namespace TechademyEmployeeManagement.DataAccess
+namespace TechademyEmployeeManagement.Data
 {
     public class EmployeeContext:DbContext
     {
@@ -16,6 +12,8 @@ namespace TechademyEmployeeManagement.DataAccess
         public DbSet<EmployeeDetails> EmployeeDetails { get; set; }
          public DbSet<Designation> Designation { get; set; }
         public DbSet<EmployeeDTO> employeeDTOs { get; set; }
+        public DbSet<RequestLeave> requestLeaves { get; set; }
+        public DbSet<WorkingHours> WorkingHours { get; set; }
 
         //protected override void OnModelCreating(ModelBuilder builder)
         //{

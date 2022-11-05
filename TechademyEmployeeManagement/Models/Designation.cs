@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace TechademyEmployeeManagement.DataAccess.Models
+namespace TechademyEmployeeManagement.Models
 {
     public class Designation
     {

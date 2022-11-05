@@ -46,6 +46,37 @@ namespace TechademyEmployeeManagement.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "requestLeaves",
+                columns: table => new
+                {
+                    LeaveID = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    LeaveType = table.Column<string>(nullable: true),
+                    When = table.Column<DateTime>(nullable: false),
+                    LeaveReason = table.Column<string>(nullable: true),
+                    LeaveStatus = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_requestLeaves", x => x.LeaveID);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "WorkingHours",
+                columns: table => new
+                {
+                    ID = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CompanyWokingHours = table.Column<TimeSpan>(nullable: false),
+                    EmployeeWorkingHours = table.Column<TimeSpan>(nullable: false),
+                    TotalWorkingHours = table.Column<TimeSpan>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_WorkingHours", x => x.ID);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "EmployeeDetails",
                 columns: table => new
                 {
@@ -84,6 +115,12 @@ namespace TechademyEmployeeManagement.Migrations
 
             migrationBuilder.DropTable(
                 name: "employeeDTOs");
+
+            migrationBuilder.DropTable(
+                name: "requestLeaves");
+
+            migrationBuilder.DropTable(
+                name: "WorkingHours");
 
             migrationBuilder.DropTable(
                 name: "Designation");

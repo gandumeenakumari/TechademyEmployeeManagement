@@ -5,8 +5,8 @@ using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using TechademyEmployeeManagement.DataAccess;
-using TechademyEmployeeManagement.DataAccess.Models;
+using TechademyEmployeeManagement.Data;
+using TechademyEmployeeManagement.Models;
 
 namespace TechademyEmployeeManagement.Controllers
 {

@@ -11,7 +11,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using TechademyEmployeeManagement.DataAccess;
+using TechademyEmployeeManagement.Core.IRepository;
+using TechademyEmployeeManagement.Core.Repository;
+using TechademyEmployeeManagement.Data;
 
 namespace TechademyEmployeeManagement
 {
@@ -39,12 +41,16 @@ namespace TechademyEmployeeManagement
             services.AddDbContext<EmployeeContext>(options => options.UseSqlServer(Configuration.GetConnectionString("myDbConnection")));
 
 
-            services.AddSwaggerGen();
+            services.AddSwaggerGen(); 
             //services.AddControllers();
 
             services.AddControllers().AddNewtonsoftJson(options =>
     options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
 );
+            services.AddMvc();
+            services.AddTransient<IEmployeeRepository, EmployeeRepository>();
+            //services.AddScoped<IEmployeeRepository, EmployeeRepository>();
+
 
         }
 
