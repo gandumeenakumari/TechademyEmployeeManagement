@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace TechademyEmployeeManagement.Migrations
 {
-    public partial class n : Migration
+    public partial class @new : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -13,7 +13,9 @@ namespace TechademyEmployeeManagement.Migrations
                 {
                     DesignationID = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    DesignationName = table.Column<string>(nullable: true)
+                    DesignationName = table.Column<string>(nullable: true),
+                    RoleName = table.Column<string>(nullable: true),
+                    DepartmentName = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -26,6 +28,7 @@ namespace TechademyEmployeeManagement.Migrations
                 {
                     ID = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    EmployeeID = table.Column<string>(nullable: true),
                     EmployeeName = table.Column<string>(nullable: true),
                     Gender = table.Column<string>(nullable: true),
                     MobileNumber = table.Column<string>(nullable: true),
@@ -33,6 +36,8 @@ namespace TechademyEmployeeManagement.Migrations
                     Email = table.Column<string>(nullable: true),
                     DesignationID = table.Column<int>(nullable: false),
                     DesignationName = table.Column<string>(nullable: true),
+                    RoleName = table.Column<string>(nullable: true),
+                    DepartmentName = table.Column<string>(nullable: true),
                     MemberSince = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>
@@ -46,6 +51,7 @@ namespace TechademyEmployeeManagement.Migrations
                 {
                     ID = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    EmployeeID = table.Column<string>(nullable: true),
                     EmployeeName = table.Column<string>(nullable: true),
                     Gender = table.Column<string>(nullable: true),
                     MobileNumber = table.Column<string>(nullable: true),

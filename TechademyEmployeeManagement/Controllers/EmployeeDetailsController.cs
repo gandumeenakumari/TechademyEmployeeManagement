@@ -31,7 +31,8 @@ namespace TechademyEmployeeManagement.Controllers
                 des => des.DesignationID,
                 (emp, des) => new EmployeeDTO
                 {
-                    ID = emp.ID,
+                    ID=emp.ID,
+                    EmployeeID = emp.EmployeeID,
                     EmployeeName = emp.EmployeeName,
                     Gender = emp.Gender,
                     MobileNumber = emp.MobileNumber,
@@ -39,6 +40,8 @@ namespace TechademyEmployeeManagement.Controllers
                     Email = emp.Email,
                     DesignationID = des.DesignationID,
                     DesignationName = des.DesignationName,
+                    RoleName=des.RoleName,
+                    DepartmentName=des.DepartmentName,
                     MemberSince = emp.MemberSince
 
                 }

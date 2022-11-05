@@ -10,6 +10,7 @@ namespace TechademyEmployeeManagement.DataAccess.Models
     public class EmployeeDetails
     {
         public int ID { get; set; }
+        public string EmployeeID { get; set; }
         //public string EmployeeID { get; set; }
         public string EmployeeName { get; set; }
         public string Gender { get; set; }
