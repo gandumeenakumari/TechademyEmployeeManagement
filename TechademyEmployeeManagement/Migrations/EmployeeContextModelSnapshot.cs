@@ -75,7 +75,7 @@ namespace TechademyEmployeeManagement.Migrations
 
             modelBuilder.Entity("TechademyEmployeeManagement.Models.EmployeeDTO", b =>
                 {
-                    b.Property<int>("ID")
+                    b.Property<int>("EmployeeID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -95,9 +95,6 @@ namespace TechademyEmployeeManagement.Migrations
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("EmployeeID")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("EmployeeName")
                         .HasColumnType("nvarchar(max)");
 
@@ -113,14 +110,14 @@ namespace TechademyEmployeeManagement.Migrations
                     b.Property<string>("RoleName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("ID");
+                    b.HasKey("EmployeeID");
 
                     b.ToTable("employeeDTOs");
                 });
 
             modelBuilder.Entity("TechademyEmployeeManagement.Models.EmployeeDetails", b =>
                 {
-                    b.Property<int>("ID")
+                    b.Property<int>("EmployeeID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -132,9 +129,6 @@ namespace TechademyEmployeeManagement.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Email")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("EmployeeID")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("EmployeeName")
@@ -149,7 +143,7 @@ namespace TechademyEmployeeManagement.Migrations
                     b.Property<string>("MobileNumber")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("ID");
+                    b.HasKey("EmployeeID");
 
                     b.HasIndex("DesignationID");
 

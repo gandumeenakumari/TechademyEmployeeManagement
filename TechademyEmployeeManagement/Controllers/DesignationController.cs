@@ -22,9 +22,24 @@ namespace TechademyEmployeeManagement.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAllDesignations()
         {
-            var designation = await _context.Designation.ToListAsync();
+            var designation = await _context.Designation.Select(c => new
+            {
+                DesignationID = c.DesignationID,
+                DesignationName = c.DesignationName,
+                RoleName = c.RoleName,
+                DepartmentName = c.DepartmentName,
+
+            }).ToListAsync();
             return Ok(designation);
         }
+        //[HttpGet]
+        //public async Task<IActionResult> GetAllDesignations()
+        //{
+        //    var designation = await _context.Designation.ToListAsync();
+        //    return Ok(designation);
+        //}
+
+
         [HttpPost]
         public async Task<IActionResult> AddDesignation([FromBody] Designation designation)
         {

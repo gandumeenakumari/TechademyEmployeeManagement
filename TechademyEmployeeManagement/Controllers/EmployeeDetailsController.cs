@@ -50,7 +50,7 @@ namespace TechademyEmployeeManagement.Controllers
         public async Task<ActionResult<EmployeeDetails>> AddNewEmployee(EmployeeDetails employee)
         {
             var create = await employeeRepository.AddNewEmployee(employee);
-            return CreatedAtAction(nameof(GetAllEmployees), new { id = create.ID }, create);
+            return CreatedAtAction(nameof(GetAllEmployees), new { id = create.EmployeeID }, create);
 
             //[HttpGet]
             //public async Task<ActionResult<IEnumerable<EmployeeDetails>>> GetAllEmployeeDetails()

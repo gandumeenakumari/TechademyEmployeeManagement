@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace TechademyEmployeeManagement.Migrations
 {
-    public partial class @new : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -45,9 +45,8 @@ namespace TechademyEmployeeManagement.Migrations
                 name: "employeeDTOs",
                 columns: table => new
                 {
-                    ID = table.Column<int>(nullable: false)
+                    EmployeeID = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    EmployeeID = table.Column<string>(nullable: true),
                     EmployeeName = table.Column<string>(nullable: true),
                     Gender = table.Column<string>(nullable: true),
                     MobileNumber = table.Column<string>(nullable: true),
@@ -61,7 +60,7 @@ namespace TechademyEmployeeManagement.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_employeeDTOs", x => x.ID);
+                    table.PrimaryKey("PK_employeeDTOs", x => x.EmployeeID);
                 });
 
             migrationBuilder.CreateTable(
@@ -99,9 +98,8 @@ namespace TechademyEmployeeManagement.Migrations
                 name: "EmployeeDetails",
                 columns: table => new
                 {
-                    ID = table.Column<int>(nullable: false)
+                    EmployeeID = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    EmployeeID = table.Column<string>(nullable: true),
                     EmployeeName = table.Column<string>(nullable: true),
                     Gender = table.Column<string>(nullable: true),
                     MobileNumber = table.Column<string>(nullable: true),
@@ -112,7 +110,7 @@ namespace TechademyEmployeeManagement.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_EmployeeDetails", x => x.ID);
+                    table.PrimaryKey("PK_EmployeeDetails", x => x.EmployeeID);
                     table.ForeignKey(
                         name: "FK_EmployeeDetails_Designation_DesignationID",
                         column: x => x.DesignationID,

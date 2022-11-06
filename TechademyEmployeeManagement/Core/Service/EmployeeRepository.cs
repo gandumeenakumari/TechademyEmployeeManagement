@@ -33,7 +33,7 @@ namespace TechademyEmployeeManagement.Core.Service
                  des => des.DesignationID,
                  (emp, des) => new EmployeeDTO
                  {
-                     ID = emp.ID,
+                     //ID = emp.ID,
                      EmployeeID = emp.EmployeeID,
                      EmployeeName = emp.EmployeeName,
                      Gender = emp.Gender,
