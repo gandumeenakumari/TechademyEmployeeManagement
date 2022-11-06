@@ -12,7 +12,7 @@ namespace TechademyEmployeeManagement.Core.IService
   
 
         //public  Task<IActionResult> GetAllEmployees();
-        public Task<IEnumerable<EmployeeDTO>> GetAllEmployees();
+        public Task<List<EmployeeDTO>> GetAllEmployees();
          //public Task<IActionResult> AddNewEmployee([FromBody] EmployeeDetails employee);
         //public Task<ActionResult<EmployeeDetails>> AddNewEmployee(EmployeeDetails employee);
         Task<EmployeeDetails> AddNewEmployee(EmployeeDetails employee);

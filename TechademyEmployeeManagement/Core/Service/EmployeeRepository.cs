@@ -23,7 +23,7 @@ namespace TechademyEmployeeManagement.Core.Service
 
         }
 
-        public async Task<IEnumerable<EmployeeDTO>> GetAllEmployees()
+        public async Task<List<EmployeeDTO>> GetAllEmployees()
         {
             
             var employee = await _context.EmployeeDetails
@@ -50,8 +50,8 @@ namespace TechademyEmployeeManagement.Core.Service
                  ).ToListAsync();
             await _context.SaveChangesAsync();
 
-            
-            return (IEnumerable<EmployeeDTO>) await _context.EmployeeDetails.ToListAsync();
+            return employee;
+            //return await _context.EmployeeDetails.ToListAsync();
         }
 
         public async Task<EmployeeDetails> AddNewEmployee(EmployeeDetails employee)
