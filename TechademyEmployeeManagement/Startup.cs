@@ -42,6 +42,7 @@ namespace TechademyEmployeeManagement
             });
 
             services.AddDbContext<EmployeeContext>(options => options.UseSqlServer(Configuration.GetConnectionString("myDbConnection")));
+            //services.AddDbContext<RegistrationContext>(options => options.UseSqlServer(Configuration.GetConnectionString("myDbConnection")));
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(x =>
             {
                 x.TokenValidationParameters = new TokenValidationParameters
@@ -64,9 +65,9 @@ namespace TechademyEmployeeManagement
     options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
 );
             services.AddMvc();
-            services.AddTransient<IEmployeeRepository, EmployeeRepository>();
-            services.AddTransient<IRegistrationService, RegistrationService>();
-            //services.AddScoped<IEmployeeRepository, EmployeeRepository>();
+           // services.AddTransient<IEmployeeRepository, EmployeeRepository>();
+            //services.AddScoped<IRegistrationService, RegistrationService>();
+            services.AddScoped<IEmployeeRepository, EmployeeRepository>();
 
 
         }

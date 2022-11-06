@@ -16,23 +16,23 @@ namespace TechademyEmployeeManagement.Controllers
     public class EmloyeeController : ControllerBase
     {
         private readonly IConfiguration _config;
-        private readonly EmployeeContext _context;
+        private readonly EmployeeContext _con;
         public EmloyeeController(IConfiguration configuration, EmployeeContext context)
         {
             _config = configuration;
-            _context = context;
+            _con = context;
         }
         [AllowAnonymous]
         [HttpPost("createEmployee")]
         public IActionResult CreateUser(Employee employee)
         {
-            if (_context.Employee.Where(u => u.Email == employee.Email).FirstOrDefault() != null)
+            if (_con.Employee.Where(u => u.Email == employee.Email).FirstOrDefault() != null)
             {
                 return Ok("Already Existed");
             }
             employee.DOJ = DateTime.Now;
-           _context.Employee.Add(employee);
-            _context.SaveChanges();
+           _con.Employee.Add(employee);
+            _con.SaveChanges();
 
             return Ok("Success");
         }
@@ -40,7 +40,7 @@ namespace TechademyEmployeeManagement.Controllers
         [HttpPost("loginEmployee")]
         public IActionResult LoginUser(Login login)
         {
-            var useravailable = _context.Employee.Where(u => u.Email == login.Email && u.Password == login.Password).FirstOrDefault();
+            var useravailable = _con.Employee.Where(u => u.Email == login.Email && u.Password == login.Password).FirstOrDefault();
             if (useravailable != null)
             {
                 return Ok(new JwtService(_config).GenerateToken(

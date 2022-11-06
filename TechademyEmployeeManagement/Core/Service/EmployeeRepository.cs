@@ -22,9 +22,10 @@ namespace TechademyEmployeeManagement.Core.Service
             _context = context;
 
         }
-        public async Task<ActionResult<IEnumerable<EmployeeDTO>>> GetAllEmployees()
+
+        public async Task<IEnumerable<EmployeeDTO>> GetAllEmployees()
         {
-            var db = new EmployeeContext();
+            
             var employee = await _context.EmployeeDetails
                  .Join(
                  _context.Designation,
@@ -49,29 +50,38 @@ namespace TechademyEmployeeManagement.Core.Service
                  ).ToListAsync();
             await _context.SaveChangesAsync();
 
-            return employee;
+            
+            return (IEnumerable<EmployeeDTO>) await _context.EmployeeDetails.ToListAsync();
         }
-        //public Task<ActionResult<IEnumerable<EmployeeDetails>>> GetAllEmployees()
-        //{
-          //  var employee = _context.EmployeeDetails.ToListAsync();
-            //return employee;
-        //}
 
-
-
-        public async Task<IActionResult> AddNewEmployee([FromBody] EmployeeDetails employee)
+        public async Task<EmployeeDetails> AddNewEmployee(EmployeeDetails employee)
         {
-            await _context.EmployeeDetails.AddAsync(employee);
+            var result = await _context.EmployeeDetails.AddAsync(employee);
             await _context.SaveChangesAsync();
-            return Ok(employee);
-
+            return result.Entity;
         }
 
-        private IActionResult Ok(EmployeeDetails employee)
+        public Task SaveChangesAsync()
         {
             throw new NotImplementedException();
         }
 
-       
+        //public Task<ActionResult<IEnumerable<EmployeeDetails>>> GetAllEmployees()
+        //{
+        //  var employee = _context.EmployeeDetails.ToListAsync();
+        //return employee;
+        //}
+
+
+
+        //public async Task<IActionResult> AddNewEmployee([FromBody] EmployeeDetails employee)
+        //{
+        //    await _context.EmployeeDetails.AddAsync(employee);
+        //    await _context.SaveChangesAsync();
+        //    return Ok(employee);
+
+        //}
+
+
     }
 }
