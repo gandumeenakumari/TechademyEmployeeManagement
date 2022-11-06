@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace TechademyEmployeeManagement.Migrations
 {
-    public partial class Initial : Migration
+    public partial class Initial2 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -64,30 +64,14 @@ namespace TechademyEmployeeManagement.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "requestLeaves",
-                columns: table => new
-                {
-                    LeaveID = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    LeaveType = table.Column<string>(nullable: true),
-                    When = table.Column<DateTime>(nullable: false),
-                    LeaveReason = table.Column<string>(nullable: true),
-                    LeaveStatus = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_requestLeaves", x => x.LeaveID);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "WorkingHours",
                 columns: table => new
                 {
                     ID = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    CompanyWokingHours = table.Column<TimeSpan>(nullable: false),
-                    EmployeeWorkingHours = table.Column<TimeSpan>(nullable: false),
-                    TotalWorkingHours = table.Column<TimeSpan>(nullable: false)
+                    EmployeeID = table.Column<int>(nullable: false),
+                    CompanyWokingHours = table.Column<double>(nullable: false),
+                    EmployeeWorkingHours = table.Column<double>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -119,19 +103,45 @@ namespace TechademyEmployeeManagement.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "requestLeaves",
+                columns: table => new
+                {
+                    LeaveID = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    EmployeeID = table.Column<int>(nullable: false),
+                    EmployeeDetailsEmployeeID = table.Column<int>(nullable: true),
+                    LeaveType = table.Column<string>(nullable: true),
+                    When = table.Column<DateTime>(nullable: false),
+                    LeaveReason = table.Column<string>(nullable: true),
+                    LeaveStatus = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_requestLeaves", x => x.LeaveID);
+                    table.ForeignKey(
+                        name: "FK_requestLeaves_EmployeeDetails_EmployeeDetailsEmployeeID",
+                        column: x => x.EmployeeDetailsEmployeeID,
+                        principalTable: "EmployeeDetails",
+                        principalColumn: "EmployeeID",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_EmployeeDetails_DesignationID",
                 table: "EmployeeDetails",
                 column: "DesignationID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_requestLeaves_EmployeeDetailsEmployeeID",
+                table: "requestLeaves",
+                column: "EmployeeDetailsEmployeeID");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
                 name: "Employee");
-
-            migrationBuilder.DropTable(
-                name: "EmployeeDetails");
 
             migrationBuilder.DropTable(
                 name: "employeeDTOs");
@@ -141,6 +151,9 @@ namespace TechademyEmployeeManagement.Migrations
 
             migrationBuilder.DropTable(
                 name: "WorkingHours");
+
+            migrationBuilder.DropTable(
+                name: "EmployeeDetails");
 
             migrationBuilder.DropTable(
                 name: "Designation");

@@ -10,8 +10,8 @@ using TechademyEmployeeManagement.Data;
 namespace TechademyEmployeeManagement.Migrations
 {
     [DbContext(typeof(EmployeeContext))]
-    [Migration("20221106091630_Initial")]
-    partial class Initial
+    [Migration("20221106141110_Initial2")]
+    partial class Initial2
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -159,6 +159,12 @@ namespace TechademyEmployeeManagement.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int?>("EmployeeDetailsEmployeeID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("EmployeeID")
+                        .HasColumnType("int");
+
                     b.Property<string>("LeaveReason")
                         .HasColumnType("nvarchar(max)");
 
@@ -173,6 +179,8 @@ namespace TechademyEmployeeManagement.Migrations
 
                     b.HasKey("LeaveID");
 
+                    b.HasIndex("EmployeeDetailsEmployeeID");
+
                     b.ToTable("requestLeaves");
                 });
 
@@ -183,14 +191,14 @@ namespace TechademyEmployeeManagement.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<TimeSpan>("CompanyWokingHours")
-                        .HasColumnType("time");
+                    b.Property<double>("CompanyWokingHours")
+                        .HasColumnType("float");
 
-                    b.Property<TimeSpan>("EmployeeWorkingHours")
-                        .HasColumnType("time");
+                    b.Property<int>("EmployeeID")
+                        .HasColumnType("int");
 
-                    b.Property<TimeSpan>("TotalWorkingHours")
-                        .HasColumnType("time");
+                    b.Property<double>("EmployeeWorkingHours")
+                        .HasColumnType("float");
 
                     b.HasKey("ID");
 
@@ -204,6 +212,13 @@ namespace TechademyEmployeeManagement.Migrations
                         .HasForeignKey("DesignationID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("TechademyEmployeeManagement.Models.RequestLeave", b =>
+                {
+                    b.HasOne("TechademyEmployeeManagement.Models.EmployeeDetails", "EmployeeDetails")
+                        .WithMany()
+                        .HasForeignKey("EmployeeDetailsEmployeeID");
                 });
 #pragma warning restore 612, 618
         }

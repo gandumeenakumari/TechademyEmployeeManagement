@@ -8,12 +8,12 @@ namespace TechademyEmployeeManagement.Models
     public class WorkingHours
     {
         public int ID { get; set; }
-        //public string EmployeeID { get; set; }
-        //public EmployeeDetails EmployeeDetails { get; set; }
-        public TimeSpan CompanyWokingHours { get; set; }
+        public int EmployeeID { get; set; }
         
-        public TimeSpan EmployeeWorkingHours { get; set; }
-        public TimeSpan TotalWorkingHours { get; set; }
+        public double CompanyWokingHours { get; set; }
+        
+        public double EmployeeWorkingHours { get; set; }
+        //public double TotalWorkingHours { get { return TotalWorkingHours; } set { TotalWorkingHours = CompanyWokingHours + EmployeeWorkingHours; } }
 
     }
 }

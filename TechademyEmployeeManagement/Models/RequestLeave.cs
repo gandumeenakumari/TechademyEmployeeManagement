@@ -10,8 +10,8 @@ namespace TechademyEmployeeManagement.Models
     {
         [Key]
        public int LeaveID { get; set; }
-        //public string EmployeeID { get; set; }
-        //public EmployeeDetails EmployeeDetails { get; set; }
+        public int EmployeeID { get; set; }
+        public EmployeeDetails EmployeeDetails { get; set; }
         public string LeaveType { get; set; }
         public DateTime When { get; set; }
         public string LeaveReason { get; set; }

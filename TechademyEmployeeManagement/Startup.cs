@@ -68,6 +68,8 @@ namespace TechademyEmployeeManagement
            // services.AddTransient<IEmployeeRepository, EmployeeRepository>();
             //services.AddScoped<IRegistrationService, RegistrationService>();
             services.AddScoped<IEmployeeRepository, EmployeeRepository>();
+            services.AddScoped<IWorkingHourManagement, WorkingHourManagement>();
+            
 
 
         }
