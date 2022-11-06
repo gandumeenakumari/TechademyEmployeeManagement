@@ -8,7 +8,7 @@ namespace TechademyEmployeeManagement.Models
 {
     public class EmployeeDTO
     {
-        [Key]
+        
         public int ID { get; set; }
         public string EmployeeID { get; set; }
         public string EmployeeName { get; set; }

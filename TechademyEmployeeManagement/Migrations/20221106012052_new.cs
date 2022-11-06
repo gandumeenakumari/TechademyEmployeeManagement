@@ -23,6 +23,25 @@ namespace TechademyEmployeeManagement.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Employee",
+                columns: table => new
+                {
+                    EmployeeID = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    FirstName = table.Column<string>(nullable: true),
+                    LastName = table.Column<string>(nullable: true),
+                    Mobile = table.Column<string>(nullable: true),
+                    Email = table.Column<string>(nullable: true),
+                    Gender = table.Column<string>(nullable: true),
+                    DOJ = table.Column<DateTime>(nullable: false),
+                    Password = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Employee", x => x.EmployeeID);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "employeeDTOs",
                 columns: table => new
                 {
@@ -110,6 +129,9 @@ namespace TechademyEmployeeManagement.Migrations
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "Employee");
+
             migrationBuilder.DropTable(
                 name: "EmployeeDetails");
 

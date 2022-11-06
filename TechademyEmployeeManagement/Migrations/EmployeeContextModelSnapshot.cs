@@ -40,6 +40,39 @@ namespace TechademyEmployeeManagement.Migrations
                     b.ToTable("Designation");
                 });
 
+            modelBuilder.Entity("TechademyEmployeeManagement.Models.Employee", b =>
+                {
+                    b.Property<int>("EmployeeID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("DOJ")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FirstName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Gender")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LastName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Mobile")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Password")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("EmployeeID");
+
+                    b.ToTable("Employee");
+                });
+
             modelBuilder.Entity("TechademyEmployeeManagement.Models.EmployeeDTO", b =>
                 {
                     b.Property<int>("ID")

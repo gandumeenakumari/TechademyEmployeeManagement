@@ -1,25 +1,30 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using TechademyEmployeeManagement.Core.IRepository;
+using TechademyEmployeeManagement.Core.IService;
 using TechademyEmployeeManagement.Data;
 using TechademyEmployeeManagement.Models;
 
-namespace TechademyEmployeeManagement.Core.Repository
+namespace TechademyEmployeeManagement.Core.Service
 {
-    public class EmployeeRepository:IEmployeeRepository
+    public class EmployeeRepository : IEmployeeRepository
     {
         private readonly EmployeeContext _context;
+
 
         public EmployeeRepository(EmployeeContext context)
         {
             _context = context;
+
         }
         public async Task<ActionResult<IEnumerable<EmployeeDTO>>> GetAllEmployees()
         {
+            var db = new EmployeeContext();
             var employee = await _context.EmployeeDetails
                  .Join(
                  _context.Designation,
@@ -42,20 +47,31 @@ namespace TechademyEmployeeManagement.Core.Repository
 
                  }
                  ).ToListAsync();
+            await _context.SaveChangesAsync();
+
             return employee;
         }
-        public async Task<ActionResult> AddNewEmployee(EmployeeDetails employee)
+        //public Task<ActionResult<IEnumerable<EmployeeDetails>>> GetAllEmployees()
+        //{
+          //  var employee = _context.EmployeeDetails.ToListAsync();
+            //return employee;
+        //}
+
+
+
+        public async Task<IActionResult> AddNewEmployee([FromBody] EmployeeDetails employee)
         {
-            _context.EmployeeDetails.Add(employee);
-            // await _context.EmployeeDetails.AddAsync(employee);
+            await _context.EmployeeDetails.AddAsync(employee);
             await _context.SaveChangesAsync();
-            return CreatedAtAction("GetAllEmployees", new { id = employee.ID }, employee);
+            return Ok(employee);
 
         }
 
-        private ActionResult CreatedAtAction(string v, object p, EmployeeDetails employee)
+        private IActionResult Ok(EmployeeDetails employee)
         {
             throw new NotImplementedException();
         }
+
+       
     }
 }

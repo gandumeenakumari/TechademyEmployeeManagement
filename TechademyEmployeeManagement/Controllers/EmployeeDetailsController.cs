@@ -5,8 +5,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using TechademyEmployeeManagement.Core.IRepository;
-using TechademyEmployeeManagement.Core.Repository;
+using TechademyEmployeeManagement.Core.IService;
+using TechademyEmployeeManagement.Core.Service;
 using TechademyEmployeeManagement.Data;
 using TechademyEmployeeManagement.Models;
 
@@ -18,29 +18,30 @@ namespace TechademyEmployeeManagement.Controllers
     {
 
         private readonly IEmployeeRepository employeeRepository;
+        
         public EmployeeDetailsController(IEmployeeRepository _employeeRepository)
         {
             employeeRepository = _employeeRepository;
+            
+
         }
 
         [HttpGet]
 
-        public ActionResult<IEnumerable<EmployeeDTO>> GetAllEmployees()
+
+        public Task<ActionResult<IEnumerable<EmployeeDTO>>> GetAllEmployees()
+        //public Task<IActionResult> GetAllEmployees();
         {
-            try
-            {
+
                 var employee = employeeRepository.GetAllEmployees();
-                return Ok(employee);
-            }
-            catch (Exception ex)
-            {
-                return Ok(ex.Message);
-            }
+                return employee;
+  
+           
         }
 
         [HttpPost]
 
-        public ActionResult AddNewEmployee(EmployeeDetails employee)
+        public async Task<IActionResult> AddNewEmployee([FromBody] EmployeeDetails employee)
         {
             return Ok(employee);
         }

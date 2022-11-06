@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -7,12 +8,14 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
-using TechademyEmployeeManagement.Core.IRepository;
-using TechademyEmployeeManagement.Core.Repository;
+using TechademyEmployeeManagement.Core.IService;
+using TechademyEmployeeManagement.Core.Service;
 using TechademyEmployeeManagement.Data;
 
 namespace TechademyEmployeeManagement
@@ -39,7 +42,20 @@ namespace TechademyEmployeeManagement
             });
 
             services.AddDbContext<EmployeeContext>(options => options.UseSqlServer(Configuration.GetConnectionString("myDbConnection")));
-
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(x =>
+            {
+                x.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuer = true,
+                    ValidateAudience = true,
+                    ValidateLifetime = true,
+                    ValidateIssuerSigningKey = true,
+                    ValidIssuer = "localhost",
+                    ValidAudience = "localhost",
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["jwtConfig:Key"])),
+                    ClockSkew = TimeSpan.Zero
+                };
+            });
 
             services.AddSwaggerGen(); 
             //services.AddControllers();
@@ -49,6 +65,7 @@ namespace TechademyEmployeeManagement
 );
             services.AddMvc();
             services.AddTransient<IEmployeeRepository, EmployeeRepository>();
+            services.AddTransient<IRegistrationService, RegistrationService>();
             //services.AddScoped<IEmployeeRepository, EmployeeRepository>();
 
 
