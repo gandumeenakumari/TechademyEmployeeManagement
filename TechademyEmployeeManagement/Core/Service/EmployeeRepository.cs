@@ -53,6 +53,18 @@ namespace TechademyEmployeeManagement.Core.Service
             return employee;
             //return await _context.EmployeeDetails.ToListAsync();
         }
+        public async Task<EmployeeDTO> GetEmployee(int EmployeeID)
+        {
+            return await _context.employeeDTOs.
+                FirstOrDefaultAsync(emp => emp.EmployeeID == EmployeeID);
+
+        }
+
+        public async Task<EmployeeDetails> GetEmployeeByID(int EmployeeID)
+        {
+            return await _context.EmployeeDetails
+                .FirstOrDefaultAsync(emp => emp.EmployeeID == EmployeeID);
+        }
 
         public async Task<EmployeeDetails> AddNewEmployee(EmployeeDetails employee)
         {
@@ -60,6 +72,42 @@ namespace TechademyEmployeeManagement.Core.Service
             await _context.SaveChangesAsync();
             return result.Entity;
         }
+
+        public async Task<EmployeeDetails> UpdateEmployee(int EmployeeID,EmployeeDetails employeeDetails)
+        {
+            var result = await _context.EmployeeDetails
+                .FirstOrDefaultAsync(emp => emp.EmployeeID == employeeDetails.EmployeeID);
+            if(result!=null)
+            {
+                result.EmployeeID = employeeDetails.EmployeeID;
+                result.EmployeeName = employeeDetails.EmployeeName;
+                result.Gender = employeeDetails.Gender;
+                result.MobileNumber = employeeDetails.MobileNumber;
+                result.Address = employeeDetails.Address;
+                result.Email = employeeDetails.Email;
+                result.DesignationID = employeeDetails.DesignationID;
+                await _context.SaveChangesAsync();
+                return result;
+            }
+            return null;
+        }
+        public async Task<EmployeeDetails> DeleteEmployee(int EmployeeID)
+        {
+            var result = await _context.EmployeeDetails
+                .FirstOrDefaultAsync(emp => emp.EmployeeID == EmployeeID);
+            if(result!=null)
+            {
+                _context.EmployeeDetails.Remove(result);
+                await _context.SaveChangesAsync();
+            }
+            return result;
+        }
+
+        public void Save()
+        {
+            _context.SaveChangesAsync();
+        }
+
 
         public Task SaveChangesAsync()
         {

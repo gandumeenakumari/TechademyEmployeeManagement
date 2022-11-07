@@ -23,7 +23,9 @@ namespace TechademyEmployeeManagement.Models
        
         public DateTime MemberSince { get; set; }
 
-       // public ICollection<WorkingHours> WorkingHours { get; set; }
+       
+
+        // public ICollection<WorkingHours> WorkingHours { get; set; }
         //public ICollection<RequestLeave> RequestLeaves { get; set; }
 
     }

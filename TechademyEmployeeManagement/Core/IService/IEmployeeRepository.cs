@@ -13,9 +13,16 @@ namespace TechademyEmployeeManagement.Core.IService
 
         //public  Task<IActionResult> GetAllEmployees();
         public Task<List<EmployeeDTO>> GetAllEmployees();
+        public Task<EmployeeDTO> GetEmployee(int EmployeeID);
+        public Task<EmployeeDetails> GetEmployeeByID(int EmployeeID);
+
          //public Task<IActionResult> AddNewEmployee([FromBody] EmployeeDetails employee);
         //public Task<ActionResult<EmployeeDetails>> AddNewEmployee(EmployeeDetails employee);
-        Task<EmployeeDetails> AddNewEmployee(EmployeeDetails employee);
+        public Task<EmployeeDetails> AddNewEmployee(EmployeeDetails employee);
+        public Task<EmployeeDetails> UpdateEmployee(int EmployeeID, EmployeeDetails employeeDetails);
+        public Task<EmployeeDetails> DeleteEmployee(int EmployeeID);
+
+        void Save();
         Task SaveChangesAsync();
     }
 }
