@@ -40,8 +40,10 @@ namespace TechademyEmployeeManagement.Core.Service
             var hours = await employeeContext.WorkingHours.AddAsync(workingHours);
             await employeeContext.SaveChangesAsync();
             return hours.Entity;
-        }
 
+            
+        }
+    
         public async Task<WorkingHours> UpdateWorkingHours(int ID,WorkingHours workingHours)
         {
             var result = await employeeContext.WorkingHours
@@ -56,15 +58,23 @@ namespace TechademyEmployeeManagement.Core.Service
             }
             return null;
         }
-        public async void DeleteWorkingHours(int ID)
+        public async Task<WorkingHours> DeleteWorkingHours(int ID)
         {
-            var result = await employeeContext.WorkingHours
-                .FirstOrDefaultAsync(w => w.ID == ID);
-            if(result!=null)
+            var result = await employeeContext.WorkingHours.
+                FirstOrDefaultAsync(w => w.ID == ID);
+
+           
+            if (result!=null)
             {
                 employeeContext.WorkingHours.Remove(result);
                 await employeeContext.SaveChangesAsync();
             }
+            return result;
+
+        }
+        public void Save()
+        {
+            employeeContext.SaveChanges();
         }
     }
 }

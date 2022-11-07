@@ -82,8 +82,8 @@ namespace TechademyEmployeeManagement.Controllers
                 return Ok(ex.Message);
             }
         }
-        [HttpDelete("{id:int}")]
-        public async Task<ActionResult<WorkingHours>> DeleteWorkingHours(int ID)
+        [HttpDelete("{ID:int}")]
+        public async Task<ActionResult> DeleteWorkingHours(int ID)
         {
             try
             {
@@ -92,7 +92,8 @@ namespace TechademyEmployeeManagement.Controllers
                 {
                     return NotFound($"Employee with ID={ID} not found");
                 }
-                return null;
+                var hour = await workingHourManagement.DeleteWorkingHours(ID);
+                return Ok(hour);
             }
             catch(Exception ex)
             {

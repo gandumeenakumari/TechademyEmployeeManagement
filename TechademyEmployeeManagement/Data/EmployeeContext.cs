@@ -18,9 +18,10 @@ namespace TechademyEmployeeManagement.Data
         public DbSet<EmployeeDetails> EmployeeDetails { get; set; }
          public DbSet<Designation> Designation { get; set; }
         public DbSet<EmployeeDTO> employeeDTOs { get; set; }
-        public DbSet<RequestLeave> requestLeaves { get; set; }
+        public DbSet<RequestLeave> RequestLeave { get; set; }
         public DbSet<WorkingHours> WorkingHours { get; set; }
         public DbSet<Employee> Employee { get; set; }
+        
 
         internal Task AddNewEmployee(EmployeeDetails employee)
         {

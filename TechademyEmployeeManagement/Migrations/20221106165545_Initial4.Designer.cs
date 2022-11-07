@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TechademyEmployeeManagement.Data;
 
 namespace TechademyEmployeeManagement.Migrations
 {
     [DbContext(typeof(EmployeeContext))]
-    partial class EmployeeContextModelSnapshot : ModelSnapshot
+    [Migration("20221106165545_Initial4")]
+    partial class Initial4
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -174,7 +176,7 @@ namespace TechademyEmployeeManagement.Migrations
 
                     b.HasKey("LeaveID");
 
-                    b.ToTable("RequestLeave");
+                    b.ToTable("requestLeaves");
                 });
 
             modelBuilder.Entity("TechademyEmployeeManagement.Models.WorkingHours", b =>

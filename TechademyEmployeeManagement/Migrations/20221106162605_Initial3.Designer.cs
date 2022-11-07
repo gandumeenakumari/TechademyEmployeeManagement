@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TechademyEmployeeManagement.Data;
 
 namespace TechademyEmployeeManagement.Migrations
 {
     [DbContext(typeof(EmployeeContext))]
-    partial class EmployeeContextModelSnapshot : ModelSnapshot
+    [Migration("20221106162605_Initial3")]
+    partial class Initial3
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -157,6 +159,9 @@ namespace TechademyEmployeeManagement.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int?>("EmployeeDetailsEmployeeID")
+                        .HasColumnType("int");
+
                     b.Property<int>("EmployeeID")
                         .HasColumnType("int");
 
@@ -174,7 +179,9 @@ namespace TechademyEmployeeManagement.Migrations
 
                     b.HasKey("LeaveID");
 
-                    b.ToTable("RequestLeave");
+                    b.HasIndex("EmployeeDetailsEmployeeID");
+
+                    b.ToTable("requestLeaves");
                 });
 
             modelBuilder.Entity("TechademyEmployeeManagement.Models.WorkingHours", b =>
@@ -205,6 +212,13 @@ namespace TechademyEmployeeManagement.Migrations
                         .HasForeignKey("DesignationID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("TechademyEmployeeManagement.Models.RequestLeave", b =>
+                {
+                    b.HasOne("TechademyEmployeeManagement.Models.EmployeeDetails", "EmployeeDetails")
+                        .WithMany("RequestLeaves")
+                        .HasForeignKey("EmployeeDetailsEmployeeID");
                 });
 #pragma warning restore 612, 618
         }

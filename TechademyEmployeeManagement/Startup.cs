@@ -69,6 +69,7 @@ namespace TechademyEmployeeManagement
             //services.AddScoped<IRegistrationService, RegistrationService>();
             services.AddScoped<IEmployeeRepository, EmployeeRepository>();
             services.AddScoped<IWorkingHourManagement, WorkingHourManagement>();
+            services.AddScoped<IRequestLeaveRepository, RequestLeaveRepository>();
             
 
 
