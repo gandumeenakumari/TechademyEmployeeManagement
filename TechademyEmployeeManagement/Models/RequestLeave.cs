@@ -14,6 +14,7 @@ namespace TechademyEmployeeManagement.Models
         //public EmployeeDetails EmployeeDetails { get; set; }
         public string LeaveType { get; set; }
         public DateTime When { get; set; }
+        
         public string LeaveReason { get; set; }
         public string LeaveStatus { get; set; }
 

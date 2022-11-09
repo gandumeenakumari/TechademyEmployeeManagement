@@ -21,12 +21,12 @@ namespace TechademyEmployeeManagement.Controllers
             this.workingHourManagement = workingHourManagement;
         }
         [HttpGet]
-        public async Task<ActionResult> GetTtoalWorkingHours()
+        public async Task<ActionResult> GetToalWorkingHours()
         {
             try
             {
                
-                return Ok(await workingHourManagement.GetTtoalWorkingHours());
+                return Ok(await workingHourManagement.GetToalWorkingHours());
             }
             catch(Exception ex)
             {
@@ -55,7 +55,7 @@ namespace TechademyEmployeeManagement.Controllers
             try
             {
                 var create = await workingHourManagement.AddWorkingHours(workingHours);
-                return CreatedAtAction(nameof(GetTtoalWorkingHours), new { id = create.ID }, create);
+                return CreatedAtAction(nameof(GetToalWorkingHours), new { id = create.ID }, create);
             }
             
             catch(Exception ex)
@@ -69,11 +69,11 @@ namespace TechademyEmployeeManagement.Controllers
             try
             {
                 if (ID!= workingHours.ID)
-                    return BadRequest("Employee ID mismatch");
+                    return BadRequest("ID mismatch");
                 var update = await workingHourManagement.GetWorkingHour(ID);
                 if(update==null)
                 {
-                    return NotFound("Employee ID not found");
+                    return NotFound("ID not found");
                 }
                 return await workingHourManagement.UpdateWorkingHours(ID,workingHours);
             }

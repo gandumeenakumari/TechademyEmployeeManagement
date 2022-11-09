@@ -28,7 +28,7 @@ namespace TechademyEmployeeManagement.Controllers
         {
             if (_con.Employee.Where(u => u.Email == employee.Email).FirstOrDefault() != null)
             {
-                return Ok("Already Existed");
+                return Ok("Already Exist");
             }
             employee.DOJ = DateTime.Now;
            _con.Employee.Add(employee);

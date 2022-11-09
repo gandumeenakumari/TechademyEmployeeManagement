@@ -9,7 +9,7 @@ namespace TechademyEmployeeManagement.Core.IService
 {
     public interface IWorkingHourManagement
     {
-        public Task<List<WorkingHours>> GetTtoalWorkingHours();
+        public Task<List<WorkingHours>> GetToalWorkingHours();
         public Task<WorkingHours> GetWorkingHour(int ID);
         public Task<WorkingHours> AddWorkingHours(WorkingHours workingHours);
         public Task<WorkingHours> UpdateWorkingHours(int ID,WorkingHours workingHours);

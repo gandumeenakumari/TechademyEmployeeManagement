@@ -70,8 +70,8 @@ namespace TechademyEmployeeManagement
             services.AddScoped<IEmployeeRepository, EmployeeRepository>();
             services.AddScoped<IWorkingHourManagement, WorkingHourManagement>();
             services.AddScoped<IRequestLeaveRepository, RequestLeaveRepository>();
-            
 
+            services.AddScoped<IDesignationRepository, DesignationRepository>();
 
         }
 

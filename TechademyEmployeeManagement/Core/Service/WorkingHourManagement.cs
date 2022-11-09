@@ -16,7 +16,7 @@ namespace TechademyEmployeeManagement.Core.Service
         {
             this.employeeContext = employeeContext;
         }
-       public async Task<List<WorkingHours>> GetTtoalWorkingHours()
+       public async Task<List<WorkingHours>> GetToalWorkingHours()
         {
             var hours = await employeeContext.WorkingHours.Select(w => new
             {

@@ -64,15 +64,10 @@ namespace TechademyEmployeeManagement.Controllers
         [HttpPost]
         public async Task<ActionResult<EmployeeDetails>> AddNewEmployee(EmployeeDetails employee)
         {
-            try {
+        
                 var create = await employeeRepository.AddNewEmployee(employee);
                 return CreatedAtAction(nameof(GetAllEmployees), new { id = create.EmployeeID }, create);
 
-            }
-            catch(Exception ex)
-            {
-                return Ok(ex.Message);
-            }
         }
         [HttpPut]
         public async Task<ActionResult<EmployeeDetails>> UpdateEmployee(int EmployeeID, EmployeeDetails employeeDetails)
