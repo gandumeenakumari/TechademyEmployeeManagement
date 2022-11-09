@@ -27,24 +27,24 @@ namespace TechademyEmployeeManagement.Controllers
         public async Task<ActionResult<RequestLeave>> AddLeave(RequestLeave requestLeave)
         {
             var create = await requestLeaveRepository.AddLeave(requestLeave);
-            return CreatedAtAction(nameof(GetAllLeaves), new { id = create.LeaveID }, create);
+            return CreatedAtAction(nameof(GetAllLeaves), new { id = create.ID }, create);
         
         }
             
             
            [HttpPut]
-        public async Task<ActionResult<RequestLeave>> UpdateLeave(int LeaveID, RequestLeave requestLeave)
+        public async Task<ActionResult<RequestLeave>> UpdateLeave(int ID, RequestLeave requestLeave)
         {
             try
             {
-                if (LeaveID != requestLeave.LeaveID)
-                    return BadRequest("Employee ID mismatch");
-                var update = await requestLeaveRepository.GetLeave(LeaveID);
+                if (ID != requestLeave.ID)
+                    return BadRequest("ID mismatch");
+                var update = await requestLeaveRepository.GetLeave(ID);
                 if (update==null)
                 {
-                    return NotFound("Employee ID not Found");
+                    return NotFound("ID not Found");
                 }
-                return await requestLeaveRepository.UpdateLeave(LeaveID, requestLeave);
+                return await requestLeaveRepository.UpdateLeave(ID, requestLeave);
             }
             catch(Exception ex)
             {
@@ -52,12 +52,12 @@ namespace TechademyEmployeeManagement.Controllers
             }
         }
 
-        [HttpGet("{LeaveID:int}")]
-        public async Task<ActionResult<RequestLeave>> GetLeave(int LeaveID)
+        [HttpGet("{ID:int}")]
+        public async Task<ActionResult<RequestLeave>> GetLeave(int ID)
         {
             try
             {
-                var result = await requestLeaveRepository.GetLeave(LeaveID);
+                var result = await requestLeaveRepository.GetLeave(ID);
                 if (result == null) return NotFound();
                 return result;
 
@@ -68,18 +68,18 @@ namespace TechademyEmployeeManagement.Controllers
             }
             }
 
-        [HttpDelete("{LeaveID:int}")]
-        public async Task<ActionResult> DeleteLeave(int LeaveID)
+        [HttpDelete("{ID:int}")]
+        public async Task<ActionResult> DeleteLeave(int ID)
         //public async Task<ActionResult<RequestLeave>> DeleteLeave(int LeaveID)
         {
 
             try
             {
-                var result = await requestLeaveRepository.GetLeave(LeaveID);
+                var result = await requestLeaveRepository.GetLeave(ID);
 
-                if (result == null) return NotFound($"Employee with LeaveID={LeaveID} not found");
-            var l=  await requestLeaveRepository.DeleteLeave(LeaveID);
-                return Ok(l);
+                if (result == null) return NotFound($"Employee with ID={ID} not found");
+            var del=  await requestLeaveRepository.DeleteLeave(ID);
+                return Ok(del);
             }
             catch (Exception ex)
             {

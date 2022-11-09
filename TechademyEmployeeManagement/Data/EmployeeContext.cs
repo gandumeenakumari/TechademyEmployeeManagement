@@ -21,12 +21,10 @@ namespace TechademyEmployeeManagement.Data
         public DbSet<RequestLeave> RequestLeave { get; set; }
         public DbSet<WorkingHours> WorkingHours { get; set; }
         public DbSet<Employee> Employee { get; set; }
-        
+        public DbSet<LeaveStatus> LeaveStatus { get; set; }
+        public DbSet<PaymentRulesModel> PaymentRules { get; set; }
 
-        internal Task AddNewEmployee(EmployeeDetails employee)
-        {
-            throw new NotImplementedException();
-        }
+   
         //protected override void OnModelCreating(ModelBuilder builder)
         //{
         //    builder.Entity<EmployeeDetails>(entity =>

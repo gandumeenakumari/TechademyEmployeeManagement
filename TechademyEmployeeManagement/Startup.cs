@@ -72,6 +72,8 @@ namespace TechademyEmployeeManagement
             services.AddScoped<IRequestLeaveRepository, RequestLeaveRepository>();
 
             services.AddScoped<IDesignationRepository, DesignationRepository>();
+            services.AddScoped<ILeaveStatusRepository, LeaveStatusRepository>();
+            services.AddScoped<IPaymentRulesRepository, PaymentRulesRepository>();
 
         }
 

@@ -9,14 +9,13 @@ namespace TechademyEmployeeManagement.Models
     public class RequestLeave
     {
         [Key]
-       public int LeaveID { get; set; }
-        public int EmployeeID { get; set; }
+        public int ID { get; set; }
+       
         //public EmployeeDetails EmployeeDetails { get; set; }
         public string LeaveType { get; set; }
         public DateTime When { get; set; }
         
         public string LeaveReason { get; set; }
-        public string LeaveStatus { get; set; }
 
     }
 }

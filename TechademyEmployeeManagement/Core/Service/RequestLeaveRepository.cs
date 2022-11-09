@@ -30,12 +30,12 @@ namespace TechademyEmployeeManagement.Core.Service
         {
             var hours = await employeeContext.RequestLeave.Select(w => new
             {
-                LeaveID= w.LeaveID,
-                EmployeeID = w.EmployeeID,
+                
+                ID = w.ID,
                 LeaveType=w.LeaveType,
                   When =w.When,
                  LeaveReason =w.LeaveReason,
-                LeaveStatus =w.LeaveStatus,
+                
         //TotalWorkingHours = w.TotalWorkingHours
 
     }).ToListAsync();
@@ -44,32 +44,32 @@ namespace TechademyEmployeeManagement.Core.Service
 
      
 
-        public async Task<RequestLeave> UpdateLeave(int LeaveID, RequestLeave requestLeave)
+        public async Task<RequestLeave> UpdateLeave(int ID, RequestLeave requestLeave)
         {
             var result = await employeeContext.RequestLeave
-     .FirstOrDefaultAsync(w => w.LeaveID == requestLeave.LeaveID);
+     .FirstOrDefaultAsync(w => w.ID == requestLeave.ID);
             if (result != null)
             {
-                result.EmployeeID = requestLeave.EmployeeID;
+                result.ID = requestLeave.ID;
                 result.LeaveType= requestLeave.LeaveType;
                 result.When= requestLeave.When;
                 result.LeaveReason= requestLeave.LeaveReason;
-                result.LeaveStatus = requestLeave.LeaveStatus;
+                
                 await employeeContext.SaveChangesAsync();
                 return result;
             }
             return null;
         }
-        public async Task<RequestLeave> GetLeave(int LeaveID)
+        public async Task<RequestLeave> GetLeave(int ID)
         {
             return await employeeContext.RequestLeave.
-                FirstOrDefaultAsync(l => l.LeaveID == LeaveID);
+                FirstOrDefaultAsync(l => l.ID == ID);
         }
 
-        public async Task<RequestLeave> DeleteLeave(int LeaveID)
+        public async Task<RequestLeave> DeleteLeave(int ID)
         {
             var result = await employeeContext.RequestLeave.
-                FirstOrDefaultAsync(w => w.LeaveID == LeaveID);
+                FirstOrDefaultAsync(w => w.ID == ID);
             if(result!=null)
             {
                 employeeContext.RequestLeave.Remove(result);
@@ -81,5 +81,7 @@ namespace TechademyEmployeeManagement.Core.Service
         {
             employeeContext.SaveChanges();
         }
+
+        
     }
 }
